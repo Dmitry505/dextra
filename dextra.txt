@@ -1,0 +1,94 @@
+using System;
+class HelloWorld {
+  static void Main() {
+    Console.WriteLine("Алгоритм ветвей-границ ");
+    Console.WriteLine("Введите колво вершин");
+    int n = Convert.ToInt32(Console.ReadLine());
+    int[,] mas = new int[n,n];
+//    int[,] masn = new int[n,n];
+    int max;
+    max = 0;
+    Console.WriteLine("Введите колво рёбер");
+    int r = Convert.ToInt32(Console.ReadLine());
+    for(int i = 0; i < r; i ++){
+        Console.WriteLine("Введите 1 вершину");
+        int x = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Введите 2 вершину");
+        int y = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Введите длину");
+        int m = Convert.ToInt32(Console.ReadLine());
+        mas[x-1,y-1] = m;
+//        mas[y-1,x-1] = m;
+        if (max < m) max = m+1;
+    }
+/*    int[,] mas = {{0,95,0,0,75,32,57,0},{0,0,6,0,18,0,0,0},{0,0,0,7,0,0,11,0},{0,0,0,0,0,0,0,81},{0,0,9,0,0,0,24,0},{0,5,0,0,0,0,20,16},{0,0,0,20,0,0,0,94},{0,0,0,0,0,0,0,0}};
+    int max = 6000;
+    int n = 8;*/
+    
+    
+    
+    
+    
+    
+    
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j <n; j++){
+            if (mas[i,j] == 0){
+                mas[i,j] = max;
+            }
+        }
+    }
+    
+    
+    int c = 0;
+    int t = 0;
+    int[] ver = new int[n];
+    int[] cf = new int[n];
+    
+    
+    for(int i = 0; i<n; i++){
+        ver[i] = max;
+    }
+    ver[0] = 0;
+    
+    
+    while(c < n){
+        int min = max * 100;
+        
+        for(int i = 0; i < n; i++){
+            if((ver[i]< min) && (cf[i] == 0)){
+                min = ver[i];
+                t = i;
+            }
+        }
+        cf[t] = 1;
+        
+        for(int j = 0; j < n; j++){
+            if((ver[t]+mas[t,j] < ver[j]) &&(j != t)){
+                ver[j] = ver[t]+mas[t,j];
+            }
+        }
+        c ++;
+            
+    }
+    
+    
+    
+    
+    
+
+ Console.WriteLine("__________________");
+    for (int i = 0 ; i < n; i++){
+        for(int j = 0; j < n; j++){
+            Console.Write(mas[i,j]+" ");
+        }
+        Console.WriteLine("");
+    }
+
+
+
+    for(int i = 0; i < n; i++){
+        Console.WriteLine(ver[i]);
+    }
+  }
+}
